@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: Introducing_satellittdata_no
+chapters:
+- file: Introduction_to_Sentinel_data
+#- file: graphical_user_interfaces
+#- file: wms
+#- file: thredds
+#- file: Sentinel_2_data_SAFE
+
+# Should also include the CSW tutorial
+# Perhaps a tutorial on TDSCatalog

@@ -1,0 +1,33 @@
+local_only/*
+
+# Data files
+*.zip
+*.nc
+data/
+
+# Jupyter Book build artefacts
+_site/
+_build/
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment / virtualenv
+.env
+.venv
+env/
+venv/
+ENV/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
