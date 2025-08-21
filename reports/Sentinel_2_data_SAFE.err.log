@@ -1,0 +1,113 @@
+Traceback (most recent call last):
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lukem/anaconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/lukem/anaconda3/lib/python3.11/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# 1. Your bounding box in WGS84:
+lat_min, lat_max = 60.46, 60.51    # change to your own
+lon_min, lon_max = 11.12, 11.19
+
+# 2. Crop each band:
+red_crop, _   = crop_band_to_bbox(band_files['red'],   lat_min, lat_max, lon_min, lon_max)
+green_crop, _ = crop_band_to_bbox(band_files['green'], lat_min, lat_max, lon_min, lon_max)
+blue_crop, _  = crop_band_to_bbox(band_files['blue'],  lat_min, lat_max, lon_min, lon_max)
+
+# 3. Stack and convert to reflectance:
+rgb_crop = np.dstack((red_crop, green_crop, blue_crop)).astype(np.float32) / 10000.0
+rgb_crop_clipped = np.clip(rgb_crop, 0.0, 0.3)
+rgb_crop_normalised = rgb_crop_clipped / 0.3
+
+# 4. Plot:
+plt.figure(figsize=(8, 8))
+plt.imshow(rgb_crop_normalised)
+plt.axis('off')
+plt.title("Cropped Sentinel-2 True Colour")
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mCPLE_AppDefinedError[0m                      Traceback (most recent call last)
+File [0;32mrasterio/crs.pyx:592[0m, in [0;36mrasterio.crs.CRS.from_epsg[0;34m()[0m
+
+File [0;32mrasterio/_err.pyx:289[0m, in [0;36mrasterio._err.exc_wrap_int[0;34m()[0m
+
+[0;31mCPLE_AppDefinedError[0m: PROJ: internal_proj_create_from_database: /home/lukem/anaconda3/share/proj/proj.db lacks DATABASE.LAYOUT.VERSION.MAJOR / DATABASE.LAYOUT.VERSION.MINOR metadata. It comes from another PROJ installation.
+
+During handling of the above exception, another exception occurred:
+
+[0;31mCRSError[0m                                  Traceback (most recent call last)
+Cell [0;32mIn[8], line 6[0m
+[1;32m      3[0m lon_min, lon_max [38;5;241m=[39m [38;5;241m11.12[39m, [38;5;241m11.19[39m
+[1;32m      5[0m [38;5;66;03m# 2. Crop each band:[39;00m
+[0;32m----> 6[0m red_crop, _   [38;5;241m=[39m crop_band_to_bbox(band_files[[38;5;124m'[39m[38;5;124mred[39m[38;5;124m'[39m],   lat_min, lat_max, lon_min, lon_max)
+[1;32m      7[0m green_crop, _ [38;5;241m=[39m crop_band_to_bbox(band_files[[38;5;124m'[39m[38;5;124mgreen[39m[38;5;124m'[39m], lat_min, lat_max, lon_min, lon_max)
+[1;32m      8[0m blue_crop, _  [38;5;241m=[39m crop_band_to_bbox(band_files[[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m],  lat_min, lat_max, lon_min, lon_max)
+
+Cell [0;32mIn[7], line 14[0m, in [0;36mcrop_band_to_bbox[0;34m(band_path, lat_min, lat_max, lon_min, lon_max)[0m
+[1;32m      5[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
+[1;32m      6[0m [38;5;124;03mOpen a single-band file and crop it to the given lat/lon box.[39;00m
+[1;32m      7[0m 
+[0;32m   (...)[0m
+[1;32m     10[0m [38;5;124;03m  transform: new Affine transform for the cropped window[39;00m
+[1;32m     11[0m [38;5;124;03m"""[39;00m
+[1;32m     12[0m [38;5;28;01mwith[39;00m rasterio[38;5;241m.[39mopen(band_path) [38;5;28;01mas[39;00m src:
+[1;32m     13[0m     [38;5;66;03m# 1. Transform WGS84 bbox to the band CRS:[39;00m
+[0;32m---> 14[0m     bbox_crs [38;5;241m=[39m transform_bounds(
+[1;32m     15[0m         [38;5;124m'[39m[38;5;124mEPSG:4326[39m[38;5;124m'[39m, 
+[1;32m     16[0m         src[38;5;241m.[39mcrs, 
+[1;32m     17[0m         lon_min, lat_min, 
+[1;32m     18[0m         lon_max, lat_max, 
+[1;32m     19[0m         densify_pts[38;5;241m=[39m[38;5;241m21[39m
+[1;32m     20[0m     )
+[1;32m     21[0m     [38;5;66;03m# 2. Compute the pixel window:[39;00m
+[1;32m     22[0m     window [38;5;241m=[39m from_bounds([38;5;241m*[39mbbox_crs, transform[38;5;241m=[39msrc[38;5;241m.[39mtransform)
+
+File [0;32m~/anaconda3/lib/python3.11/site-packages/rasterio/warp.py:147[0m, in [0;36mtransform_bounds[0;34m(src_crs, dst_crs, left, bottom, right, top, densify_pts)[0m
+[1;32m    113[0m [38;5;28;01mdef[39;00m [38;5;21mtransform_bounds[39m(
+[1;32m    114[0m         src_crs,
+[1;32m    115[0m         dst_crs,
+[0;32m   (...)[0m
+[1;32m    119[0m         top,
+[1;32m    120[0m         densify_pts[38;5;241m=[39m[38;5;241m21[39m):
+[1;32m    121[0m [38;5;250m    [39m[38;5;124;03m"""Transform bounds from src_crs to dst_crs.[39;00m
+[1;32m    122[0m 
+[1;32m    123[0m [38;5;124;03m    Optionally densifying the edges (to account for nonlinear transformations[39;00m
+[0;32m   (...)[0m
+[1;32m    145[0m [38;5;124;03m        Outermost coordinates in target coordinate reference system.[39;00m
+[1;32m    146[0m [38;5;124;03m    """[39;00m
+[0;32m--> 147[0m     src_crs [38;5;241m=[39m CRS[38;5;241m.[39mfrom_user_input(src_crs)
+[1;32m    148[0m     dst_crs [38;5;241m=[39m CRS[38;5;241m.[39mfrom_user_input(dst_crs)
+[1;32m    149[0m     [38;5;28;01mreturn[39;00m _transform_bounds(
+[1;32m    150[0m         src_crs,
+[1;32m    151[0m         dst_crs,
+[0;32m   (...)[0m
+[1;32m    156[0m         densify_pts,
+[1;32m    157[0m     )
+
+File [0;32mrasterio/crs.pyx:790[0m, in [0;36mrasterio.crs.CRS.from_user_input[0;34m()[0m
+
+File [0;32mrasterio/crs.pyx:852[0m, in [0;36mrasterio.crs.CRS.from_string[0;34m()[0m
+
+File [0;32mrasterio/crs.pyx:596[0m, in [0;36mrasterio.crs.CRS.from_epsg[0;34m()[0m
+
+[0;31mCRSError[0m: The EPSG code is unknown. PROJ: internal_proj_create_from_database: /home/lukem/anaconda3/share/proj/proj.db lacks DATABASE.LAYOUT.VERSION.MAJOR / DATABASE.LAYOUT.VERSION.MINOR metadata. It comes from another PROJ installation.
+CRSError: The EPSG code is unknown. PROJ: internal_proj_create_from_database: /home/lukem/anaconda3/share/proj/proj.db lacks DATABASE.LAYOUT.VERSION.MAJOR / DATABASE.LAYOUT.VERSION.MINOR metadata. It comes from another PROJ installation.
+

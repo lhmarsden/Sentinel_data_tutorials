@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Sentinel data &#8212; satelittdata.no tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Introduction_to_Sentinel_data';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introducing satellittdata.no" href="Introducing_satellittdata_no.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="Introducing_satellittdata_no.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="satelittdata.no tutorials - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="satelittdata.no tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Introducing_satellittdata_no.html">
+                    Introducing satellittdata.no
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Sentinel data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lhmarsden/Sentinel_data_tutorials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lhmarsden/Sentinel_data_tutorials/issues/new?title=Issue%20on%20page%20%2FIntroduction_to_Sentinel_data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Introduction_to_Sentinel_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Sentinel data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-satellite-data">Levels of satellite data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-sentinel-missions">Overview of the Sentinel Missions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-information-below-in-particular-launch-dates-add-links-to-mission-specific-pages-on-copernicus-for-more-information">CHECK INFORMATION BELOW IN PARTICULAR LAUNCH DATES. ADD LINKS TO MISSION SPECIFIC PAGES ON COPERNICUS FOR MORE INFORMATION.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-1">Sentinel-1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-2">Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-3">Sentinel-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5-precursor-sentinel-5p">Sentinel-5 Precursor (Sentinel-5P)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-4">Sentinel-4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5">Sentinel-5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-6">Sentinel-6</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-sentinel-data">
+<h1>Introduction to Sentinel data<a class="headerlink" href="#introduction-to-sentinel-data" title="Permalink to this heading">#</a></h1>
+<p>Include</p>
+<ul class="simple">
+<li><p>Levels of satellite data (separate video?)</p></li>
+<li><p>Overview of each of the Sentinel missions - what each measures, data formats?</p></li>
+<li><p>Introduce <a class="reference external" href="http://satellittdata.no">satellittdata.no</a> and CDSE - but separate section on <a class="reference external" href="http://satellittdata.no">satellittdata.no</a> maybe?</p></li>
+</ul>
+<section id="levels-of-satellite-data">
+<span id="sec-levels"></span><h2>Levels of satellite data<a class="headerlink" href="#levels-of-satellite-data" title="Permalink to this heading">#</a></h2>
+<p>Satellite data products are categorized into different levels, each representing a progressively higher level of processing. These levels generally range from 0 to 4, with higher numbers indicating more processed and potentially more user-friendly data.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Product Scope</p></th>
+<th class="head"><p>Geometry</p></th>
+<th class="head"><p>Time Resolution</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Processing</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>L0</p></td>
+<td><p>Individual observations</p></td>
+<td><p>As recorded by sensor</p></td>
+<td><p>Native/orbital</p></td>
+<td><p>Raw, unprocessed satellite data, including telemetry and ancillary information</p></td>
+<td><p>None; direct from instrument</p></td>
+<td><p>When you need original, unaltered data for custom processing or calibration</p></td>
+</tr>
+<tr class="row-odd"><td><p>L1</p></td>
+<td><p>Individual observations</p></td>
+<td><p>Geolocated</p></td>
+<td><p>Native/orbital</p></td>
+<td><p>Radiometrically and geometrically corrected data in sensor units</p></td>
+<td><p>Radiometric correction, calibration, geolocation</p></td>
+<td><p>For sensor-level analysis, calibration checks, or basic radiance studies</p></td>
+</tr>
+<tr class="row-even"><td><p>L2</p></td>
+<td><p>Individual observations</p></td>
+<td><p>Geolocated</p></td>
+<td><p>Native/orbital</p></td>
+<td><p>Geophysical variables derived from L1, at original resolution</p></td>
+<td><p>Algorithmic derivation of physical parameters</p></td>
+<td><p>When you need high-resolution data with exact observation times, for studying local or short-term events. If you plan to apply your own processing or interpolation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>L3</p></td>
+<td><p>Regional or global product</p></td>
+<td><p>Regular grid</p></td>
+<td><p>Daily, weekly, etc.</p></td>
+<td><p>Geophysical variables mapped onto a regular grid to produce regional or global datasets over specific time periods</p></td>
+<td><p>Spatial and/or temporal aggregation of L1 or L2 data; individual image detail is lost</p></td>
+<td><p>For relatively high-resolution regional or global studies, when you need data on a standard grid for easier integration and analysis.</p></td>
+</tr>
+<tr class="row-even"><td><p>L4</p></td>
+<td><p>Regional or global product</p></td>
+<td><p>Regular grid</p></td>
+<td><p>Multi-day, monthly, etc.</p></td>
+<td><p>Modelled or assimilated data combining multiple sources and full validation</p></td>
+<td><p>Modelling, data assimilation, interpolation across sensors and time</p></td>
+<td><p>When you require a continuous, gap-free dataset, even if it means some loss of the finer detail.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each level may be further subdivided into sublevels (e.g., L1A, L1B, L1C), reflecting increasing levels of refinement within than processing level.</p>
+<blockquote>
+<div><p><strong><a class="reference external" href="https://satellittdata.no">satellittdata.no</a> hosts a catalogue of Level 0 to Level 2 (L0-L2) Sentinel data.</strong> Level 3 (L3) and Level 4 (L4) data products are provided by downstream data providers.</p>
+<p>For tutorials on working with selected L3 and L4 data products using Python, visit the following resource:<br />
+<a class="reference external" href="https://nordatanet.github.io/Exploring_FAIR_data_with_Python">Exploring FAIR Data with Python</a></p>
+</div></blockquote>
+</section>
+<section id="overview-of-the-sentinel-missions">
+<h2>Overview of the Sentinel Missions<a class="headerlink" href="#overview-of-the-sentinel-missions" title="Permalink to this heading">#</a></h2>
+<p>The <strong>Sentinel satellites</strong> are a series of Earth observation missions developed by the European Space Agency (ESA) as part of the Copernicus Programme. Each mission is designed with specific capabilities to monitor different aspects of our planet.</p>
+</section>
+<section id="check-information-below-in-particular-launch-dates-add-links-to-mission-specific-pages-on-copernicus-for-more-information">
+<h2>CHECK INFORMATION BELOW IN PARTICULAR LAUNCH DATES. ADD LINKS TO MISSION SPECIFIC PAGES ON COPERNICUS FOR MORE INFORMATION.<a class="headerlink" href="#check-information-below-in-particular-launch-dates-add-links-to-mission-specific-pages-on-copernicus-for-more-information" title="Permalink to this heading">#</a></h2>
+<section id="sentinel-1">
+<h3>Sentinel-1<a class="headerlink" href="#sentinel-1" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-1 is a radar imaging mission designed to provide all-weather, day-and-night Earth observation. It primarily measures surface features by sending microwave signals and analysing their reflections, making it ideal for:</p>
+<ul class="simple">
+<li><p><strong>Monitoring land surfaces:</strong> detecting changes such as land subsidence, deforestation, and urban development</p></li>
+<li><p><strong>Ocean observation:</strong> tracking sea ice, oil spills, and wave heights</p></li>
+<li><p><strong>Emergency response:</strong> rapid imaging after natural disasters like floods and earthquakes</p></li>
+<li><p><strong>Launches:</strong></p>
+<ul>
+<li><p>Sentinel-1A: 3 April 2014</p></li>
+<li><p>Sentinel-1B: 25 April 2016 (mission ended 2022)</p></li>
+<li><p>Sentinel-1C: 5 December 2024 (restored full mission capabilities, added maritime traffic monitoring)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sentinel-2">
+<h3>Sentinel-2<a class="headerlink" href="#sentinel-2" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-2 is a multispectral imaging mission capturing high-resolution optical images in visible and near-infrared wavelengths. It focuses on land monitoring by measuring reflected sunlight, enabling:</p>
+<ul class="simple">
+<li><p><strong>Vegetation analysis:</strong> tracking crop health, forestry, and plant growth</p></li>
+<li><p><strong>Soil and water monitoring:</strong> assessing soil moisture and water quality in rivers, lakes, and coastal areas</p></li>
+<li><p><strong>Disaster management:</strong> mapping areas affected by droughts, wildfires, and floods</p></li>
+<li><p><strong>Launches:</strong></p>
+<ul>
+<li><p>Sentinel-2A: 23 June 2015</p></li>
+<li><p>Sentinel-2B: 7 March 2017</p></li>
+<li><p>Sentinel-2C: 5 September 2024 (ensures continuity of high-resolution land data)</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li></li>
+</ul>
+</section>
+<section id="sentinel-3">
+<h3>Sentinel-3<a class="headerlink" href="#sentinel-3" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-3 is a multi-instrument mission that measures various environmental parameters to support oceanography and land monitoring:</p>
+<ul class="simple">
+<li><p><strong>Sea-surface topography:</strong> measuring sea level and currents for ocean forecasting</p></li>
+<li><p><strong>Sea and land surface temperature:</strong> monitoring climate and environmental changes</p></li>
+<li><p><strong>Ocean and land colour:</strong> assessing water quality, algae blooms, and vegetation health</p></li>
+<li><p><strong>Launches:</strong></p>
+<ul>
+<li><p>Sentinel-3A: 16 February 2016</p></li>
+<li><p>Sentinel-3B: 25 April 2018</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sentinel-5-precursor-sentinel-5p">
+<h3>Sentinel-5 Precursor (Sentinel-5P)<a class="headerlink" href="#sentinel-5-precursor-sentinel-5p" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-5P monitors atmospheric gases and aerosols that affect air quality and climate, filling the data gap before Sentinel-5’s launch:</p>
+<ul class="simple">
+<li><p><strong>Trace gases:</strong> such as nitrogen dioxide (NO₂), ozone (O₃), and carbon monoxide (CO)</p></li>
+<li><p><strong>Aerosols:</strong> tiny particles affecting air pollution and visibility</p></li>
+<li><p><strong>Launch:</strong> 13 October 2017 from Plesetsk Cosmodrome, Russia</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sentinel-4">
+<h3>Sentinel-4<a class="headerlink" href="#sentinel-4" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-4 is an atmospheric monitoring instrument onboard the Meteosat Third Generation Sounder (MTG-S) satellites in geostationary orbit:</p>
+<ul class="simple">
+<li><p><strong>Hourly data delivery</strong> on trace gases and pollutants over Europe</p></li>
+<li><p><strong>Monitors:</strong> ozone, nitrogen dioxide, sulfur dioxide, and aerosols</p></li>
+<li><p><strong>Purpose:</strong> forecasting and tracking air quality in near real-time</p></li>
+<li><p><strong>Launch:</strong> 1 July 2025 aboard the first MTG-S satellite</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sentinel-5">
+<h3>Sentinel-5<a class="headerlink" href="#sentinel-5" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-5 is designed to monitor atmospheric composition from polar orbit aboard MetOp Second Generation satellites:</p>
+<ul class="simple">
+<li><p><strong>Measures:</strong> trace gases, aerosols, and air pollutants</p></li>
+<li><p><strong>Supports:</strong> climate monitoring and air quality forecasting on a global scale</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sentinel-6">
+<h3>Sentinel-6<a class="headerlink" href="#sentinel-6" title="Permalink to this heading">#</a></h3>
+<p>Sentinel-6 carries a radar altimeter to measure global sea-surface height with high precision:</p>
+<ul class="simple">
+<li><p><strong>Primary use:</strong> oceanography and climate studies</p></li>
+<li><p><strong>Applications:</strong> monitoring sea-level rise, ocean circulation, and climate change impacts</p></li>
+<li><p><strong>Launch:</strong> 21 November 2020</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Introducing_satellittdata_no.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introducing satellittdata.no</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-satellite-data">Levels of satellite data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-sentinel-missions">Overview of the Sentinel Missions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-information-below-in-particular-launch-dates-add-links-to-mission-specific-pages-on-copernicus-for-more-information">CHECK INFORMATION BELOW IN PARTICULAR LAUNCH DATES. ADD LINKS TO MISSION SPECIFIC PAGES ON COPERNICUS FOR MORE INFORMATION.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-1">Sentinel-1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-2">Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-3">Sentinel-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5-precursor-sentinel-5p">Sentinel-5 Precursor (Sentinel-5P)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-4">Sentinel-4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5">Sentinel-5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-6">Sentinel-6</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Luke Marsden
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
